@@ -1,5 +1,10 @@
 {
+    "name": "octaviomarchi/phpunit-test-udemy",
+    "description": "Simple project to study phpunit running with docker",
     "require": {
         "phpunit/phpunit": "^7.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
     }
 }
