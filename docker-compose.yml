@@ -10,6 +10,16 @@ services:
     volumes:
       - .:/app
 
+  phpunit:
+    container_name: phpunit
+    image: php:7.4-cli
+    restart: 'no'
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: vendor/bin/phpunit
+    command: phpunit tests
+
   composer:
     restart: 'no'
     image: composer/composer
