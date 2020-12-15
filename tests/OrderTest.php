@@ -4,43 +4,38 @@ use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
 {
-
     public function tearDown(): void
     {
         Mockery::close();
     }
 
-    public function testOrderIsProcessed()
+    public function testOrderIsProcessedUsingAMock()
     {
-        $gateway = $this->getMockBuilder('PaymentGateway')
-            ->setMethods(['charge'])
-            ->getMock();
+        $order = new Order(3, 1.99);
 
-        $gateway->expects($this->once())
-            ->method('charge')
-            ->with($this->equalTo(200))
-            ->willReturn(true);
+        $this->assertEquals(5.97, $order->amount);
 
-        $order = new Order($gateway);
+        $gateway_mock = Mockery::mock('PaymentGateway');
 
-        $order->amount = 200;
+        $gateway_mock->shouldReceive('charge')
+            ->once()
+            ->with(5.97);
 
-        $this->assertTrue($order->process());
+        $order->process($gateway_mock);
     }
 
-    public function testOrderIsProcessedUsingMockery()
+    public function testOrderIsProcessedUsingASpy()
     {
-        $gateway = Mockery::mock('PaymentGateway');
+        $order = new Order(3, 1.99);
 
-        $gateway->shouldReceive('charge')
+        $this->assertEquals(5.97, $order->amount);
+
+        $gateway_spy = Mockery::spy('PaymentGateway');
+
+        $order->process($gateway_spy);
+
+        $gateway_spy->shouldHaveReceived('charge')
             ->once()
-            ->with(200)
-            ->andReturn(true);
-
-        $order = new Order($gateway);
-
-        $order->amount = 200;
-
-        $this->assertTrue($order->process());
+            ->with(5.97);
     }
 }
