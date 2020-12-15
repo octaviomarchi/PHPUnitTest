@@ -1,2 +1,4 @@
 #composer apps
 vendor/
+
+.phpunit.result.cache
