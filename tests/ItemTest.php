@@ -22,6 +22,13 @@ class ItemTest extends TestCase
     {
         $item = new ItemChild;
 
-        $this->assertIsInt($item->getToken());
+        $reflector = new ReflectionClass(Item::class);
+
+        $method = $reflector->getMethod('getToken');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($item);
+
+        $this->assertIsString($result);
     }
 }
