@@ -22,7 +22,7 @@ class ArticleTest extends TestCase
     {
         $this->assertSame('', $this->article->getSlug());
     }
-
+    /*
     public function testSlugHasSpacesReplacedByUnderscores()
     {
         $this->article->title = "An example article";
@@ -49,5 +49,26 @@ class ArticleTest extends TestCase
         $this->article->title = 'Read! This! Now!';
 
         $this->assertEquals('Read_This_Now', $this->article->getSlug());
+    }
+    */
+
+    public function titleProvider()
+    {
+        return [
+            'Slug Has Spaces Replaced By Underscores' => ["An example article", "An_example_article"],
+            'Slug Has Whitespace Replaced By Single Underscore' => ["An   example   \n  article", "An_example_article"],
+            'Slug Does Not Start Or End With Underscore' => [" An example article ", "An_example_article"],
+            'Slug Does Not Have Any Non Word Characters' => ["Read! This! Now!", "Read_This_Now"],
+        ];
+    }
+
+    /**
+     * @dataProvider titleProvider
+     */
+    public function testSlug($title, $slug)
+    {
+        $this->article->title = $title;
+
+        $this->assertEquals($slug, $this->article->getSlug());
     }
 }
