@@ -6,17 +6,27 @@ use PHPUnit\Framework\TestCase;
 
 class ArticleTest extends TestCase
 {
+    protected $article;
+
+    public function setUp(): void
+    {
+        $this->article = new Article;
+    }
+
     public function testTitleIsEmptyByDefault()
     {
-        $article = new Article;
-
-        $this->assertEmpty($article->title);
+        $this->assertEmpty($this->article->title);
     }
 
     public function testSlugIsEmptyWithNoTitle()
     {
-        $article = new Article;
+        $this->assertSame('', $this->article->getSlug());
+    }
 
-        $this->assertSame('', $article->getSlug());
+    public function testSlugHasSpacesReplacedByUnderscores()
+    {
+        $this->article->title = "An example article";
+
+        $this->assertEquals('An_example_article', $this->article->getSlug());
     }
 }

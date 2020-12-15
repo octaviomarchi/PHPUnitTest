@@ -8,6 +8,6 @@ class Article
 
     public function getSlug()
     {
-        return "";
+        return str_replace(' ', '_', $this->title);
     }
 }
