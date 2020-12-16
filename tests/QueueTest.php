@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class QueueTests extends TestCase
+class QueueTest extends TestCase
 {
     protected static $queue;
 
