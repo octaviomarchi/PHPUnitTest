@@ -4,6 +4,12 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
     public function testReturnFullName()
     {
         $user = new User('');
@@ -60,9 +66,11 @@ class UserTest extends TestCase
         $this->expectException(Exception::class);
 
         $user->notify('Hello');
+
+        unset($mock_mailer);
     }
 
-    public function testNotifyReturnsTrue()
+    public function testNotifyReturnsTrueOption1()
     {
         $user = new User('dave@example.com');
 
@@ -74,6 +82,8 @@ class UserTest extends TestCase
         $user->setMailer($mailer);
 
         $this->assertTrue($user->notifyNonStatic('Hello!'));
+
+        unset($mailer);
     }
 
     public function testNotifyReturnsTrueOption2()
@@ -89,4 +99,22 @@ class UserTest extends TestCase
 
         $this->assertTrue($user->notifyCallable('Hello!'));
     }
+
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function testNotifyReturnsTrueOption3()
+    {
+        $user = new User('dave@example.com');
+
+        $mock = Mockery::mock('alias:Mailer');
+
+        $mock->shouldReceive('send')
+            ->once()
+            ->with($user->email, 'Hello!')
+            ->andReturn(true);
+
+        $this->assertTrue($user->notifyStaticMailer('Hello!'));
+    }   
 }

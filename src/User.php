@@ -91,8 +91,20 @@ class User
     public function notify($message)
     {
         // return $this->mailer->sendMessage($this->email, $message);
-        // return $this->mailer::send($this->email, $message);
-        return $this->mailer->send($this->email, $message);
+        return $this->mailer::send($this->email, $message);
+        // return $this->mailer->send($this->email, $message);
+    }
+
+    /**
+     * Send the user a message with hard coded Mailer
+     * 
+     * @param string $message The message
+     * 
+     * @return boolean True if sent, false otherwise
+     */
+    public function notifyStaticMailer($message)
+    {
+        return Mailer::send($this->email, $message);
     }
 
     public function notifyNonStatic($message)
