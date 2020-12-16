@@ -6,7 +6,7 @@ class UserTest extends TestCase
 {
     public function testReturnFullName()
     {
-        $user = new User;
+        $user = new User('');
 
         $user->first_name = "Teresa";
         $user->surname = "Green";
@@ -16,7 +16,7 @@ class UserTest extends TestCase
 
     public function testFullNameIsEmptyByDefault()
     {
-        $user = new User;
+        $user = new User('');
 
         $this->assertEquals('', $user->getFullName());
     }
@@ -26,7 +26,7 @@ class UserTest extends TestCase
      */
     public function user_has_first_name()
     {
-        $user = new User;
+        $user = new User('');
 
         $user->first_name = "Teresa";
 
@@ -41,8 +41,7 @@ class UserTest extends TestCase
                     ->with($this->equalTo('dave@example.com'), $this->equalTo('Hello'))
                     ->willReturn(true);
         
-        $user = new User;
-        $user->email = 'dave@example.com';
+        $user = new User('dave@example.com');
         $user->setMailer($mock_mailer);
 
         $this->assertTrue($user->notify('Hello'));
@@ -50,7 +49,7 @@ class UserTest extends TestCase
 
     public function testCannotNotifyUserWithNoEmail()
     {
-        $user = new User;
+        $user = new User('');
 
         $mock_mailer = $this->getMockBuilder(Mailer::class)
                             ->setMethods(null)
@@ -63,4 +62,15 @@ class UserTest extends TestCase
         $user->notify('Hello');
 
     }
+
+    public function testNotifyReturnsTrue()
+    {
+        $user = new User('dave@example.com');
+
+        $mailer = $this->createMock(Mailer::class);
+
+        $user->setMailer($mailer);
+
+        $this->assertTrue($user->notify('Hello!'));
+    }    
 }

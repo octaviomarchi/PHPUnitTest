@@ -33,6 +33,17 @@ class User
     protected $mailer;
 
     /**
+     * Constructor
+     * 
+     * @param string $email The user's email
+     * 
+     * @return void
+     */
+    public function __construct(string $email) {
+        $this->email = $email;
+    }
+
+    /**
      * Set the mailer dependency
      * 
      * @param Mailer $mailer The Mailer object
@@ -61,6 +72,7 @@ class User
      */
     public function notify($message)
     {
-        return $this->mailer->sendMessage($this->email, $message);
+        // return $this->mailer->sendMessage($this->email, $message);
+        return $this->mailer::send($this->email, $message);
     }
 }
