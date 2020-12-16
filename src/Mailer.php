@@ -12,19 +12,24 @@ class Mailer
      * 
      * @param string $email The email address
      * @param string $message The message
+     * @param bool $print If the 'echo' will be printed
+     * 
+     * @throws InvalidArgumentException If $email is empty
      * 
      * @return bool True if sent, false otherwise
      */
-    public function sendMessage($email, $message)
+    public function sendMessage($email, $message, bool $print = false)
     {
         if (empty($email)) {
-            throw new Exception;
+            throw new InvalidArgumentException;
         }
 
         // Use mail() or PHPMailer for example
         sleep(3);
 
-        echo "send '$message' to '$email'";
+        if ($print) {
+            echo "send '$message' to '$email'";
+        }
 
         return true;
     }
@@ -34,18 +39,21 @@ class Mailer
      *
      * @param string $email  Recipient email address
      * @param string $message  Content of the message
+     * @param bool $print If the 'echo' will be printed
      *
      * @throws InvalidArgumentException If $email is empty
      *
      * @return boolean
      */
-    public function send(string $email, string $message)
+    public static function send(string $email, string $message, bool $print = false)
     {
         if (empty($email)) {
             throw new InvalidArgumentException;
         }
 
-        echo "Send '$message' to $email";
+        if ($print) {
+            echo "Send '$message' to $email";
+        }
 
         return true;
     }

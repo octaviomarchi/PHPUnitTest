@@ -37,14 +37,14 @@ class UserTest extends TestCase
     {
         $mock_mailer = $this->createMock(Mailer::class);
         $mock_mailer->expects($this->once())
-                    ->method('send')
-                    ->with($this->equalTo('dave@example.com'), $this->equalTo('Hello'))
-                    ->willReturn(true);
-        
+            ->method('sendMessage')
+            ->with($this->equalTo('dave@example.com'), $this->equalTo('Hello'))
+            ->willReturn(true);
+
         $user = new User('dave@example.com');
         $user->setMailer($mock_mailer);
 
-        $this->assertTrue($user->notify('Hello'));
+        $this->assertTrue($user->notifyNonStatic('Hello'));
     }
 
     public function testCannotNotifyUserWithNoEmail()
@@ -52,15 +52,14 @@ class UserTest extends TestCase
         $user = new User('');
 
         $mock_mailer = $this->getMockBuilder(Mailer::class)
-                            ->setMethods(null)
-                            ->getMock();
+            ->setMethods(null)
+            ->getMock();
 
         $user->setMailer($mock_mailer);
-        
+
         $this->expectException(Exception::class);
 
         $user->notify('Hello');
-
     }
 
     public function testNotifyReturnsTrue()
@@ -69,11 +68,25 @@ class UserTest extends TestCase
 
         $mailer = $this->createMock(Mailer::class);
 
-        $mailer->method('send')
+        $mailer->method('sendMessage')
             ->willReturn(true);
 
         $user->setMailer($mailer);
 
-        $this->assertTrue($user->notify('Hello!'));
-    }    
+        $this->assertTrue($user->notifyNonStatic('Hello!'));
+    }
+
+    public function testNotifyReturnsTrueOption2()
+    {
+        $user = new User('dave@example.com');
+
+        $user->setMailerCallable(function () {
+
+            // echo "mocked";
+
+            return true;
+        });
+
+        $this->assertTrue($user->notifyCallable('Hello!'));
+    }
 }

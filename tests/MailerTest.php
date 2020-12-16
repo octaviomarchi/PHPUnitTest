@@ -18,7 +18,7 @@ class MailerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         // Mailer::send('', '');
-        $mailer->send('', '');
+        $mailer->sendMessage('', '');
 
     }
 }
