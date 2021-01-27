@@ -2,7 +2,7 @@
 
 /**
  * User
- * 
+ *
  * A user of the system
  */
 class User
@@ -12,25 +12,25 @@ class User
      * First name
      * @var string
      */
-    public $first_name;
+    public string $first_name;
 
     /**
      * Last name
      * @var string
      */
-    public $surname;
+    public string $surname;
 
     /**
      * Email address
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * Mailer object
      * @var Mailer
      */
-    protected $mailer;
+    protected Mailer $mailer;
 
     /**
      * Mailer callable
@@ -40,12 +40,13 @@ class User
 
     /**
      * Constructor
-     * 
+     *
      * @param string $email The user's email
-     * 
+     *
      * @return void
      */
-    public function __construct(string $email) {
+    public function __construct(string $email)
+    {
         $this->email = $email;
     }
 
@@ -63,7 +64,7 @@ class User
 
     /**
      * Set the mailer dependency
-     * 
+     *
      * @param Mailer $mailer The Mailer object
      */
     public function setMailer(Mailer $mailer)
@@ -72,23 +73,23 @@ class User
     }
 
     /**
-     * Get the users's full name from their first name and surname
-     * 
+     * Get the user's full name from their first name and surname
+     *
      * @return string The user's full name
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return trim("$this->first_name $this->surname");
     }
 
     /**
      * Send the user a message
-     * 
+     *
      * @param string $message The message
-     * 
+     *
      * @return boolean True if sent, false otherwise
      */
-    public function notify($message)
+    public function notify(string $message): bool
     {
         // return $this->mailer->sendMessage($this->email, $message);
         return $this->mailer::send($this->email, $message);
@@ -97,17 +98,17 @@ class User
 
     /**
      * Send the user a message with hard coded Mailer
-     * 
+     *
      * @param string $message The message
-     * 
+     *
      * @return boolean True if sent, false otherwise
      */
-    public function notifyStaticMailer($message)
+    public function notifyStaticMailer(string $message): bool
     {
         return Mailer::send($this->email, $message);
     }
 
-    public function notifyNonStatic($message)
+    public function notifyNonStatic($message): bool
     {
         return $this->mailer->sendMessage($this->email, $message);
         // return $this->mailer::send($this->email, $message);
@@ -116,12 +117,12 @@ class User
 
     /**
      * Send the user a message by callable
-     * 
+     *
      * @param string $message The message
-     * 
+     *
      * @return boolean True if sent, false otherwise
      */
-    public function notifyCallable($message)
+    public function notifyCallable(string $message): bool
     {
         return call_user_func($this->mailer_callable, $this->email, $message);
     }
