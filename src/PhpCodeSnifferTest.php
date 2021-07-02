@@ -29,10 +29,9 @@ class PhpCodeSnifferTest
      * 
      * @return void
      */
-    function test() 
-    {
-        if ($string) {  
-            print_r($string);
+    function test() {
+        if( $this->string) {
+            print_r ($this->string );
         }
     }
 }
