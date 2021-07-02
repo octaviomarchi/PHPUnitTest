@@ -31,8 +31,8 @@ class PhpCodeSnifferTest
      */
     function test() 
     {
-        if ($string) {  
-            print_r($string);
+        if ($this->string) {  
+            print_r($this->string);
         }
     }
 }
