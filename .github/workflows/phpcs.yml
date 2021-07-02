@@ -1,0 +1,19 @@
+on: pull_request
+
+name: Inspections
+jobs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Run PHPCS inspection
+        uses: rtCamp/action-phpcs-code-review@v2.0.3
+        env:
+          GH_BOT_TOKEN: "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"
+          SKIP_FOLDERS: "tests,.github, vendor"
+          PHPCS_SNIFFS_EXCLUDE: "WordPress.Files.FileName"
+        with:
+          args: "PSR12"
