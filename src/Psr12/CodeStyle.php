@@ -1,6 +1,6 @@
 <?php
 
-namespace PSR12
+namespace Psr12;
 
 /**
  * File doc
@@ -29,7 +29,7 @@ class CodeStyle
 	/**
 	 * small description
 	 *
-	 * @param $bar bar
+	 * @param string $bar bar
 	 *
 	 * @return void
 	 */
