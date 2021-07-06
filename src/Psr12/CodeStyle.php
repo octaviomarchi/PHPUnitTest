@@ -1,7 +1,5 @@
 <?php
 
-namespace Psr12;
-
 /**
  * File doc
  * PHP version 7.4
