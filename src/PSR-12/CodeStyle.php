@@ -1,5 +1,7 @@
 <?php
 
+namespace PSR12
+
 /**
  * File doc
  * PHP version 7.4
@@ -22,19 +24,19 @@
  */
 class CodeStyle
 {
-    var $Foo = "bar";
+	public $Foo = "bar";
 
-    /**
-     * small description
-     *
-     * @param $bar bar
-     *
-     * @return void
-     */
-    function foo($bar)
-    {
-        if(  !empty($bar)){
-            echo $bar;
-        }
-    }
+	/**
+	 * small description
+	 *
+	 * @param $bar bar
+	 *
+	 * @return void
+	 */
+	public function foo($bar)
+	{
+		if (!empty($bar)) {
+			echo $bar;
+		}
+	}
 }
