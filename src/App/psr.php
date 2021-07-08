@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * File doc
  * PHP version 7.4
@@ -22,19 +24,16 @@
  */
 class psr
 {
-    public $foo = "bar";
+	public $foo = "bar";
 
-    /**
-     * small description
-     *
-     * @param string $bar bar
-     *
-     * @return void
-     */
-    function foo($bar)
-    {
-        if (!empty($bar)) {
-            echo $bar;
-        }
-    }
+	/**
+	 * small description
+	 */
+	function foo($bar)
+	{
+
+		if (!empty($bar)) {
+			echo "bar" . $bar;
+		}
+	}
 }
