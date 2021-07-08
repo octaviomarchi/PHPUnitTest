@@ -9,7 +9,7 @@
 
     <!-- Code MUST follow all rules outlined in PSR-1. -->
     <rule ref="PSR1">
-        <exclude name="Classes.ClassDeclaration.MissingNamespace" />
+        <!-- <exclude name="Classes.ClassDeclaration.MissingNamespace" /> -->
     </rule>
 
     <!-- The term 'StudlyCaps' in PSR-1 MUST be interpreted as PascalCase where the first letter of each word is capitalized including the very first letter. -->
