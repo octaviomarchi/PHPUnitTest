@@ -20,9 +20,8 @@
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     5
  */
-class CodeStyle
-{
-	public $Foo = "bar";
+class codestyle {
+	public $foo = "bar";
 
 	/**
 	 * small description
@@ -31,9 +30,9 @@ class CodeStyle
 	 *
 	 * @return void
 	 */
-	public function foo($bar)
+	function foo($bar)
 	{
-		if (!empty($bar)) {
+		if(!empty($bar)) {
 			echo $bar;
 		}
 	}
