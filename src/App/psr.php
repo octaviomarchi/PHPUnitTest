@@ -22,7 +22,8 @@ namespace App;
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     5
  */
-class Psr {
+class Psr
+{
 	public $foo = "bar";
 
 	/**
