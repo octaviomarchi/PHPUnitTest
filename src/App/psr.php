@@ -22,14 +22,13 @@ namespace App;
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     5
  */
-class psr
-{
+class Psr {
 	public $foo = "bar";
 
 	/**
 	 * small description
 	 */
-	function foo($bar)
+	public function foo($bar)
 	{
 
 		if (!empty($bar)) {
