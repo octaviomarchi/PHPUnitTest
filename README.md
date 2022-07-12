@@ -27,8 +27,3 @@ The project has an image to run PHPUnit. The flag `--rm` is used for the contain
 ``docker-compose run --rm composer %command%``
 
 Use it just like you would use composer, substituting the `%command%` to the actual command you want to run. The flag `--rm` is used for the container be removed after it is done.
-
-## PHP Code Sniffer
-``docker-compose run --rm phpcs /path/to/code/myfile.php``
-
-In case you want to check for design patterns inconsistencies on your code.
