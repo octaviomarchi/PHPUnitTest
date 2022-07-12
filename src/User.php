@@ -57,7 +57,7 @@ class User
      *
      * @return void
      */
-    public function setMailerCallable(callable $mailer_callable)
+    public function setMailerCallable(callable $mailer_callable): void
     {
         $this->mailer_callable = $mailer_callable;
     }
@@ -67,7 +67,7 @@ class User
      *
      * @param Mailer $mailer The Mailer object
      */
-    public function setMailer(Mailer $mailer)
+    public function setMailer(Mailer $mailer): void
     {
         $this->mailer = $mailer;
     }
@@ -79,6 +79,9 @@ class User
      */
     public function getFullName(): string
     {
+        if(!isset($this->first_name, $this->surname)){
+            return  '';
+        }
         return trim("$this->first_name $this->surname");
     }
 

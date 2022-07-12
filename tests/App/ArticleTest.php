@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class ArticleTest extends TestCase
 {
-    protected $article;
+    protected Article $article;
 
     public function setUp(): void
     {
@@ -15,14 +15,14 @@ class ArticleTest extends TestCase
 
     public function testTitleIsEmptyByDefault()
     {
-        $this->assertEmpty($this->article->title);
+        $this->assertFalse(isset($this->article->title));
     }
 
     public function testSlugIsEmptyWithNoTitle()
     {
         $this->assertSame('', $this->article->getSlug());
     }
-    /*
+
     public function testSlugHasSpacesReplacedByUnderscores()
     {
         $this->article->title = "An example article";
@@ -50,7 +50,6 @@ class ArticleTest extends TestCase
 
         $this->assertEquals('Read_This_Now', $this->article->getSlug());
     }
-    */
 
     public function titleProvider()
     {
